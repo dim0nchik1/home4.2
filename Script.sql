@@ -1,9 +1,7 @@
-ззадание 2
+задание 2
 
-select name, duration
-from track
-order by duration desc 
-limit 1;
+select name, duration from track
+where duration >= (select max(duration) from track)
 
 select name, duration
 from track 
@@ -19,7 +17,7 @@ where name not like '%% %%';
 
 select name 
 from track
-where name like '%my%';
+where name ilike '%my%';
 
 
 
@@ -41,10 +39,11 @@ select a.name, AVG(t.duration) from album a
 join track t on a.id = t.album_id
 group by a.name;
 
-select e.name from executor e
+select e.name from executor e  
 join albumexecutor ae on e.id = ae.executor_id 
 join album a on a.id = ae.album_id
-where a.year < 2020
+where year not between '20200101' and '20201231' 
+group by e.name
 
 select c.name from collection c 
 join collectiontrack ct on c.id = ct.collection_id
